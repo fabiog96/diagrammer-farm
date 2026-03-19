@@ -1,4 +1,3 @@
-![Diagrammer Farm](/src/assets/images/logo.png)
 # Diagrammer Farm
 
 A web-based tool for visually designing cloud architectures on a canvas and generating production-ready **Terragrunt/Terraform** repositories from them — no manual HCL writing required.
