@@ -1,0 +1,58 @@
+{
+  "name": "diagrammer-farm",
+  "build": {
+    "dockerfile": "Dockerfile"
+  },
+  "features": {
+    "ghcr.io/devcontainers/features/aws-cli:1": {},
+    "ghcr.io/devcontainers/features/docker-in-docker:2": {
+      "moby": false
+    },
+    "ghcr.io/devcontainers/features/github-cli:1": {},
+    "ghcr.io/itsmechlark/features/act:1": {},
+    "ghcr.io/devcontainers/features/common-utils:2": {},
+    "ghcr.io/devcontainers/features/node:1": {
+      "version": "22"
+    }
+  },
+  "customizations": {
+    // vscode extensions to install
+    "vscode": {
+      "settings": {
+        "python.pythonPath": "/usr/local/bin/python",
+        "python.linting.enabled": true,
+        "python.linting.pylintEnabled": true,
+        "python.linting.pylintArgs": [
+          "--disable=C0111" // Disable missing docstring warnings
+        ]
+      },
+      "extensions": [
+        "dbaeumer.vscode-eslint",
+        "esbenp.prettier-vscode",
+        "ms-vscode.vscode-typescript-next",
+        "oderwat.indent-rainbow",
+        "ms-python.python",
+        "ms-python.vscode-pylance",
+        "mgesbert.python-path",
+        "ms-python.autopep8",
+        "ms-python.pylint",
+        "ms-python.mypy-type-checker",
+        "ms-python.isort",
+        "eamodio.gitlens",
+        "bradlc.vscode-tailwindcss",
+        "rooveterinaryinc.roo-cline",
+        "anthropic.claude-code"
+      ]
+    }
+  },
+  "mounts": [
+    "source=adk-library-roo-mcp-settings,target=/home/vscode/.vscode-server-insiders/data/User/globalStorage/rooveterinaryinc.roo-cline/settings,type=volume",
+    "source=${localEnv:HOME}/.claude,target=/home/vscode/.claude,type=bind,consistency=cached",
+    "source=${localEnv:HOME}/.claude.json,target=/home/vscode/.claude.json,type=bind,consistency=cached"
+ ],
+  "remoteUser": "vscode",
+  "workspaceFolder": "/workspace",
+  "workspaceMount": "source=${localWorkspaceFolder},target=/workspace,type=bind,consistency=cached",
+  "postCreateCommand": "chmod +x .devcontainer/postCreateCommand.sh && ./.devcontainer/postCreateCommand.sh",
+  "forwardPorts": [5173, 5679]
+}

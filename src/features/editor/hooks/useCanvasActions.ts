@@ -19,9 +19,11 @@ export const useCanvasActions = () => {
     },
     [selectedNodeId, removeNode],
   );
-
+  //TODO: add undo/redo, copy/paste, multi-select and group actions here
   useEffect(() => {
     document.addEventListener('keydown', handleKeyDown);
     return () => document.removeEventListener('keydown', handleKeyDown);
   }, [handleKeyDown]);
 };
+
+
