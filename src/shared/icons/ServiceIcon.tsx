@@ -1,17 +1,18 @@
 import { memo } from 'react';
 
 import {
-  TbServer, TbDatabase, TbBolt, TbWorld, TbShield,
-  TbCloud, TbBox, TbNetwork, TbMail, TbContainer,
+  TbServer, TbDatabase, TbWorld, TbShield,
+  TbCloud, TbNetwork, TbMail, TbContainer,
   TbBrain, TbChartBar, TbKey, TbStack2, TbRouter,
   TbCpu, TbBucket, TbUsers, TbLambda, TbNote,
   TbAlignLeft, TbRocket, TbServerBolt, TbCloudComputing,
   TbBrandDocker, TbDeviceFloppy, TbArchive, TbDeviceAnalytics,
   TbTopologyStar, TbPlugConnected, TbWebhook, TbShieldLock,
   TbFingerprint, TbLock, TbScan, TbEye, TbFileSearch,
-  TbActivity, TbSearch, TbFilter, TbTransform, TbGitBranch,
+  TbActivity, TbSearch, TbTransform, TbGitBranch,
   TbAutomation, TbSettingsAutomation, TbFileCode, TbCloudCog,
-  TbApiApp, TbSchema, TbGauge, TbWand
+  TbApi, TbApiApp, TbSchema, TbWand, TbDeviceMobile,
+  TbBrowser, TbSmartHome, TbUserCode, TbUserShield, TbGlobe
 } from 'react-icons/tb';
 
 
@@ -94,30 +95,6 @@ const iconMap: Record<string, React.ElementType> = {
   // AWS — Management
   'aws-cloudformation': TbFileCode,
   'aws-systems-manager': TbCloudCog,
-  'azure-vm': TbServer,
-  'azure-blob': TbBucket,
-  'azure-sql': TbDatabase,
-  'azure-functions': TbBolt,
-  'azure-cosmos': TbDatabase,
-  'azure-cdn': TbWorld,
-  'azure-apim': TbRouter,
-  'azure-lb': TbNetwork,
-  'azure-aks': TbContainer,
-  'azure-app-service': TbCloud,
-  'azure-key-vault': TbKey,
-  'azure-event-hub': TbMail,
-  'gcp-compute': TbServer,
-  'gcp-storage': TbBucket,
-  'gcp-sql': TbDatabase,
-  'gcp-functions': TbBolt,
-  'gcp-firestore': TbDatabase,
-  'gcp-cdn': TbWorld,
-  'gcp-lb': TbNetwork,
-  'gcp-gke': TbContainer,
-  'gcp-app-engine': TbCloud,
-  'gcp-cloud-run': TbBox,
-  'gcp-pubsub': TbMail,
-  'gcp-bigquery': TbChartBar,
   'generic-server': TbServer,
   'generic-database': TbDatabase,
   'generic-storage': TbBucket,
@@ -127,6 +104,14 @@ const iconMap: Record<string, React.ElementType> = {
   'generic-users': TbUsers,
   'generic-react': FaReact,
   'generic-json': BsFiletypeJson,
+  'generic-mobile-app': TbDeviceMobile,
+  'generic-web-app': TbBrowser,
+  'generic-iot-device': TbSmartHome,
+  'generic-external-api': TbApi,
+  'generic-developer': TbUserCode,
+  'generic-admin': TbUserShield,
+  'generic-internet': TbGlobe,
+  'generic-cloud': TbCloud,
   'generic-note': TbNote,
   'generic-text': TbAlignLeft
 };

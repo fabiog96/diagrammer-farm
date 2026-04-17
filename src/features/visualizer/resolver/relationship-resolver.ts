@@ -8,29 +8,24 @@ import { discoverProjects, type ProjectCatalog } from '../discovery';
  *
  * @example
  * detectProvider('aws_lambda_function')   // → 'aws'
- * detectProvider('google_project')        // → 'gcp'
- * detectProvider('azurerm_storage_blob')  // → 'azure'
  * detectProvider('null_resource')         // → 'generic'
  */
 const detectProvider = (resourceType: string): Provider => {
   if (resourceType.startsWith('aws_')) return 'aws';
-  if (resourceType.startsWith('google_') || resourceType.startsWith('google-beta_')) return 'gcp';
-  if (resourceType.startsWith('azurerm_')) return 'azure';
   return 'generic';
 };
 
 /**
- * Converts an AWS/GCP/Azure resource type into a human-readable service name.
+ * Converts a Terraform resource type into a human-readable service name.
  * Strips the provider prefix and replaces underscores with spaces.
  *
  * @example
- * toServiceType('aws_lambda_function')     // → 'lambda function'
- * toServiceType('aws_dynamodb_table')      // → 'dynamodb table'
- * toServiceType('google_project_service')  // → 'project service'
+ * toServiceType('aws_lambda_function')  // → 'lambda function'
+ * toServiceType('aws_dynamodb_table')   // → 'dynamodb table'
  */
 const toServiceType = (resourceType: string): string => {
   return resourceType
-    .replace(/^(aws|google|google-beta|azurerm)_/, '')
+    .replace(/^aws_/, '')
     .replace(/_/g, ' ');
 };
 

@@ -54,9 +54,6 @@ export const RESOURCE_MAPPING: Record<string, { icon: string; color: string }> =
   aws_athena_workgroup: { icon: 'generic-database', color: '#8C4FFF' },
   aws_sfn_state_machine: { icon: 'generic-compute', color: '#FF4F8B' },
   aws_ecr_repository: { icon: 'aws-ecs', color: '#FF9900' },
-  google_project_service: { icon: 'gcp-compute', color: '#4285F4' },
-  google_iap_brand: { icon: 'gcp-compute', color: '#4285F4' },
-  google_service_account: { icon: 'gcp-compute', color: '#4285F4' },
 };
 
 /**

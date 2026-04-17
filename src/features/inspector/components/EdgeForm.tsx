@@ -11,7 +11,7 @@ import { useDiagramStore } from '@/stores';
 import type { EdgeData, LineStyle, TechNodeData, OutputMapping } from '@/shared/types';
 import { getModule } from '@/features/codegen/data/module-registry';
 
-export const  EdgeForm = () => {
+export const EdgeForm = () => {
   const selectedEdgeId = useDiagramStore((s) => s.selectedEdgeId);
 
   const edgeData = useDiagramStore(

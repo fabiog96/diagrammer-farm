@@ -1,5 +1,5 @@
 export type NodeType = 'resource' | 'module' | 'data';
-export type Provider = 'aws' | 'gcp' | 'azure' | 'generic';
+export type Provider = 'aws' | 'generic';
 export type EdgeType = 'explicit' | 'implicit' | 'terragrunt' | 'ghost';
 
 export interface GraphNode {

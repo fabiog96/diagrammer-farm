@@ -12,4 +12,7 @@ export const serviceCategories: Record<string, string> = {
   integration: 'Integration',
   devtools: 'Developer Tools',
   management: 'Management',
+  clients: 'Clients',
+  actors: 'Actors',
+  other: 'Other',
 };

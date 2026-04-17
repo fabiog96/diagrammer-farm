@@ -136,7 +136,6 @@ const inferIconFromType = (node: GraphNode): string => {
       aws_s3_bucket: 'aws-s3',
       aws_secretsmanager_secret: 'aws-iam',
       aws_secretsmanager_secret_version: 'aws-iam',
-      google_project: 'gcp-compute',
     };
     const raw = node.serviceType.replace(/ /g, '_');
     return resourceMapping[raw] ?? 'generic-database';

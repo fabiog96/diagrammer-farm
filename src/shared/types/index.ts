@@ -1,6 +1,6 @@
 import type { Node, Edge } from '@xyflow/react';
 
-export type CloudProvider = 'aws' | 'azure' | 'gcp' | 'generic';
+export type CloudProvider = 'aws' | 'generic';
 
 export type NodeStatus = 'healthy' | 'warning' | 'error' | 'none';
 export interface TechNodeData extends Record<string, unknown> {
