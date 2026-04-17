@@ -128,14 +128,14 @@ export const computeLayout = (
 const inferIconFromType = (node: GraphNode): string => {
   if (node.type === 'data') {
     const resourceMapping: Record<string, string> = {
-      aws_ecr_repository: 'aws-ecs',
-      aws_acm_certificate: 'aws-cloudfront',
+      aws_ecr_repository: 'aws-ecr',
+      aws_acm_certificate: 'aws-acm',
       aws_route53_zone: 'aws-route53',
       aws_caller_identity: 'aws-iam',
       aws_region: 'generic-server',
       aws_s3_bucket: 'aws-s3',
-      aws_secretsmanager_secret: 'aws-iam',
-      aws_secretsmanager_secret_version: 'aws-iam',
+      aws_secretsmanager_secret: 'aws-secrets-manager',
+      aws_secretsmanager_secret_version: 'aws-secrets-manager',
     };
     const raw = node.serviceType.replace(/ /g, '_');
     return resourceMapping[raw] ?? 'generic-database';
