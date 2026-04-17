@@ -76,6 +76,7 @@ export const computeLayout = (
           filePath: gNode.filePath,
           lineStart: gNode.lineStart,
           moduleSource: gNode.moduleSource,
+          subproject: gNode.subproject,
           isComposite: style.icons.length > 1,
         },
       };
@@ -97,6 +98,7 @@ export const computeLayout = (
         nodeType: gNode.type,
         layer: gNode.layer,
         project: gNode.project,
+        subproject: gNode.subproject,
         filePath: gNode.filePath,
         lineStart: gNode.lineStart,
         isComposite: false,

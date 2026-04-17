@@ -3,8 +3,7 @@ import { applyNodeChanges, type OnNodesChange, type Node, type Edge } from '@xyf
 
 import type { GraphNode, GraphEdge } from '../resolver/types';
 import type { ParseError, ParseStats } from '../parser/types';
-
-export type GroupByMode = 'project' | 'layer' | 'flat';
+import type { ProjectCatalog } from '../discovery/types';
 
 interface VisualizerState {
   graphNodes: GraphNode[];
@@ -14,16 +13,22 @@ interface VisualizerState {
   errors: ParseError[];
   stats: ParseStats | null;
   selectedNodeId: string | null;
-  groupBy: GroupByMode;
-  searchQuery: string;
+  projectCatalog: ProjectCatalog | null;
+  selectedProject: string | null;
+  selectedSubproject: string | null;
+  selectedModule: string | null;
+  expandedModuleId: string | null;
 
   setGraph: (nodes: GraphNode[], edges: GraphEdge[]) => void;
   setFlowElements: (nodes: Node[], edges: Edge[]) => void;
   setErrors: (errors: ParseError[]) => void;
   setStats: (stats: ParseStats) => void;
   setSelectedNode: (id: string | null) => void;
-  setGroupBy: (mode: GroupByMode) => void;
-  setSearchQuery: (query: string) => void;
+  setProjectCatalog: (catalog: ProjectCatalog) => void;
+  setSelectedProject: (project: string | null) => void;
+  setSelectedSubproject: (subproject: string | null) => void;
+  setSelectedModule: (moduleName: string | null) => void;
+  setExpandedModule: (moduleId: string | null) => void;
   onNodesChange: OnNodesChange<Node>;
   clearVisualizer: () => void;
 }
@@ -41,8 +46,11 @@ export const useVisualizerStore = create<VisualizerState>((set, get) => ({
   errors: [],
   stats: null,
   selectedNodeId: null,
-  groupBy: 'project',
-  searchQuery: '',
+  projectCatalog: null,
+  selectedProject: null,
+  selectedSubproject: null,
+  selectedModule: null,
+  expandedModuleId: null,
 
   setGraph: (graphNodes, graphEdges) => set({ graphNodes, graphEdges }),
 
@@ -54,9 +62,34 @@ export const useVisualizerStore = create<VisualizerState>((set, get) => ({
 
   setSelectedNode: (id) => set({ selectedNodeId: id }),
 
-  setGroupBy: (groupBy) => set({ groupBy }),
+  setProjectCatalog: (projectCatalog) => set({ projectCatalog }),
 
-  setSearchQuery: (searchQuery) => set({ searchQuery }),
+  setSelectedProject: (selectedProject) => set({
+    selectedProject,
+    selectedSubproject: null,
+    selectedModule: null,
+    selectedNodeId: null,
+    expandedModuleId: null,
+  }),
+
+  setSelectedSubproject: (selectedSubproject) => set({
+    selectedSubproject,
+    selectedModule: null,
+    selectedNodeId: null,
+    expandedModuleId: null,
+  }),
+
+  setSelectedModule: (moduleName) => set((state) => ({
+    selectedModule: state.selectedModule === moduleName ? null : moduleName,
+    selectedProject: null,
+    selectedSubproject: null,
+    selectedNodeId: null,
+    expandedModuleId: null,
+  })),
+
+  setExpandedModule: (moduleId) => set((state) => ({
+    expandedModuleId: state.expandedModuleId === moduleId ? null : moduleId,
+  })),
 
   /** Allows node dragging for repositioning while keeping the canvas read-only (D5). */
   onNodesChange: (changes) => {
@@ -77,6 +110,10 @@ export const useVisualizerStore = create<VisualizerState>((set, get) => ({
       errors: [],
       stats: null,
       selectedNodeId: null,
-      searchQuery: '',
+      projectCatalog: null,
+      selectedProject: null,
+      selectedSubproject: null,
+      selectedModule: null,
+      expandedModuleId: null,
     }),
 }));

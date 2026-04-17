@@ -1,6 +1,7 @@
 import type { ParsedFile, ParsedResource, ParseError } from '../parser/types';
 import type { GraphNode, GraphEdge, Provider, NodeType } from './types';
 import { normalizeSourcePath } from './module-source-resolver';
+import { discoverProjects, type ProjectCatalog } from '../discovery';
 
 /**
  * Detects the cloud provider from a Terraform resource type string.
@@ -325,4 +326,50 @@ export const resolveRelationships = (files: ParsedFile[]): ResolveResult => {
   }
 
   return { nodes, edges, errors };
+};
+
+/**
+ * Enriches GraphNodes with tag-based project/subproject data and module metadata.
+ * Uses the 5-pass discovery engine to override file-path-inferred projects
+ * with accurate tag-derived values.
+ *
+ * Returns the enriched nodes and the full ProjectCatalog.
+ */
+export const enrichNodesWithProjects = (
+  nodes: GraphNode[],
+  parsedFiles: ParsedFile[],
+): { nodes: GraphNode[]; catalog: ProjectCatalog } => {
+  const catalog = discoverProjects(parsedFiles);
+
+  // Build resourceId → { project, subproject } from catalog
+  const projectLookup = new Map<string, { project: string; subproject?: string }>();
+  for (const [projectName, info] of catalog.projects.entries()) {
+    for (const resId of info.resourceIds) {
+      const subproject = info.subprojects.find((s) => s.resourceIds.includes(resId));
+      projectLookup.set(resId, { project: projectName, subproject: subproject?.name });
+    }
+  }
+
+  // Build resourceId → module info from catalog
+  const moduleLookup = new Map<string, string>();
+  for (const [moduleName, info] of catalog.modules.entries()) {
+    for (const resId of info.internalResourceIds) {
+      moduleLookup.set(resId, moduleName);
+    }
+  }
+
+  const enrichedNodes = nodes.map((node) => {
+    const tagInfo = projectLookup.get(node.id);
+    const parentModule = moduleLookup.get(node.id);
+
+    return {
+      ...node,
+      project: tagInfo?.project ?? node.project,
+      subproject: tagInfo?.subproject ?? node.subproject,
+      isModuleInternal: parentModule !== undefined,
+      parentModule,
+    };
+  });
+
+  return { nodes: enrichedNodes, catalog };
 };

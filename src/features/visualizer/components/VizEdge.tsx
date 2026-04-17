@@ -8,7 +8,7 @@ import {
 
 interface VizEdgeData {
   label?: string;
-  edgeType?: 'explicit' | 'implicit' | 'terragrunt';
+  edgeType?: 'explicit' | 'implicit' | 'terragrunt' | 'ghost';
 }
 
 /**
@@ -45,17 +45,23 @@ const RawVizEdge = ({
     borderRadius: 12,
   });
 
-  const strokeDasharray = edgeType === 'terragrunt'
-    ? '6,4'
-    : edgeType === 'implicit'
-      ? '2,4'
-      : 'none';
+  const strokeDasharray = edgeType === 'ghost'
+    ? '4,6'
+    : edgeType === 'terragrunt'
+      ? '6,4'
+      : edgeType === 'implicit'
+        ? '2,4'
+        : 'none';
 
-  const strokeColor = edgeType === 'terragrunt'
-    ? 'var(--accent)'
-    : selected
-      ? 'var(--primary)'
-      : 'var(--muted-foreground)';
+  const strokeColor = edgeType === 'ghost'
+    ? 'var(--muted-foreground)'
+    : edgeType === 'terragrunt'
+      ? 'var(--accent)'
+      : selected
+        ? 'var(--primary)'
+        : 'var(--muted-foreground)';
+
+  const strokeOpacity = edgeType === 'ghost' ? 0.3 : 1;
 
   return (
     <>
@@ -66,6 +72,7 @@ const RawVizEdge = ({
           stroke: strokeColor,
           strokeWidth: selected ? 2 : 1.5,
           strokeDasharray,
+          opacity: strokeOpacity,
           transition: 'stroke 0.15s, stroke-width 0.15s',
         }}
       />

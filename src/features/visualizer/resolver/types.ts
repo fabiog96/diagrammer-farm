@@ -1,6 +1,6 @@
 export type NodeType = 'resource' | 'module' | 'data';
 export type Provider = 'aws' | 'gcp' | 'azure' | 'generic';
-export type EdgeType = 'explicit' | 'implicit' | 'terragrunt';
+export type EdgeType = 'explicit' | 'implicit' | 'terragrunt' | 'ghost';
 
 export interface GraphNode {
   id: string;
@@ -10,9 +10,12 @@ export interface GraphNode {
   label: string;
   layer?: string;
   project?: string;
+  subproject?: string;
   filePath: string;
   lineStart: number;
   moduleSource?: string;
+  isModuleInternal?: boolean;
+  parentModule?: string;
 }
 
 export interface GraphEdge {

@@ -1,6 +1,6 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { Link } from 'react-router';
-import { TbArrowLeft, TbTopologyStarRing3 } from 'react-icons/tb';
+import { TbArrowLeft, TbTopologyStarRing3, TbSettings, TbAlertTriangle } from 'react-icons/tb';
 import { ReactFlowProvider } from '@xyflow/react';
 
 import { useUIStore } from '@/stores';
@@ -9,12 +9,30 @@ import {
   TooltipProvider, Tooltip, TooltipTrigger, TooltipContent,
   Button, Separator,
 } from '@/shared/components/ui';
-import { VisualizerCanvas, VisualizerInspector } from '@/features/visualizer/components';
+import {
+  Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription,
+} from '@/shared/components/ui/dialog';
+import {
+  VisualizerCanvas,
+  VisualizerInspector,
+  GitHubSettings,
+  ProjectSidebar,
+  BottomPanel,
+} from '@/features/visualizer/components';
 import { useVisualizerStore } from '@/features/visualizer/stores/visualizerStore';
+import { useGitHubStore } from '@/features/visualizer/stores/githubStore';
+import { useProjectVisualization } from '@/features/visualizer/hooks/useProjectVisualization';
 
 const VisualizerLayout = () => {
   const theme = useUIStore((s) => s.theme);
   const stats = useVisualizerStore((s) => s.stats);
+  const errors = useVisualizerStore((s) => s.errors);
+  const projectCatalog = useVisualizerStore((s) => s.projectCatalog);
+  const selectedProject = useVisualizerStore((s) => s.selectedProject);
+  const token = useGitHubStore((s) => s.token);
+  const [settingsOpen, setSettingsOpen] = useState(!token);
+
+  useProjectVisualization();
 
   useEffect(() => {
     document.documentElement.setAttribute('data-theme', theme);
@@ -50,11 +68,12 @@ const VisualizerLayout = () => {
               <>
                 <Separator orientation="vertical" className="mx-1 h-4" />
                 <span className="text-[10px] text-muted-foreground">
-                  {stats.totalResources} resources from {stats.parsedFiles} files
+                  {stats.totalResources} resources · {stats.parsedFiles} files
+                  {projectCatalog && ` · ${projectCatalog.projects.size} projects`}
                 </span>
-                {stats.totalErrors > 0 && (
-                  <span className="text-[10px] text-error">
-                    ({stats.totalErrors} errors)
+                {selectedProject && (
+                  <span className="text-[10px] font-medium text-primary ml-1">
+                    · {selectedProject}
                   </span>
                 )}
               </>
@@ -62,17 +81,61 @@ const VisualizerLayout = () => {
           </div>
 
           <div className="flex items-center gap-1">
+            {stats && errors.length > 0 && (
+              <span className="flex items-center gap-1 text-[10px] text-destructive mr-1">
+                <TbAlertTriangle className="h-3 w-3" />
+                {errors.length}
+              </span>
+            )}
+
+            <Tooltip>
+              <TooltipTrigger asChild>
+                <Button
+                  variant="ghost"
+                  size="icon"
+                  className={`h-7 w-7 ${settingsOpen ? 'bg-primary/10 text-primary' : ''}`}
+                  onClick={() => setSettingsOpen(!settingsOpen)}
+                >
+                  <TbSettings className="h-3.5 w-3.5" />
+                </Button>
+              </TooltipTrigger>
+              <TooltipContent>GitHub settings</TooltipContent>
+            </Tooltip>
             <ThemeToggle />
           </div>
         </div>
       </TooltipProvider>
 
+      {/* GitHub Settings Dialog */}
+      <Dialog open={settingsOpen} onOpenChange={setSettingsOpen}>
+        <DialogContent>
+          <DialogHeader>
+            <DialogTitle>GitHub Connection</DialogTitle>
+            <DialogDescription>
+              Connect to a repository to scan Terraform infrastructure.
+            </DialogDescription>
+          </DialogHeader>
+          <GitHubSettings onSyncComplete={() => setSettingsOpen(false)} />
+        </DialogContent>
+      </Dialog>
+
       <div className="flex flex-1 overflow-hidden">
+        {/* Left sidebar: project list */}
+        {projectCatalog && (
+          <div className="flex w-72 shrink-0 flex-col border-r border-border bg-card">
+            <ProjectSidebar />
+          </div>
+        )}
+
+        {/* Canvas */}
         <main className="flex flex-1 flex-col overflow-hidden">
           {stats ? (
-            <div className="flex-1 overflow-hidden">
-              <VisualizerCanvas />
-            </div>
+            <>
+              <div className="flex-1 overflow-hidden">
+                <VisualizerCanvas />
+              </div>
+              {errors.length > 0 && <BottomPanel />}
+            </>
           ) : (
             <div className="flex flex-1 items-center justify-center">
               <div className="flex flex-col items-center gap-4 text-center">
@@ -81,13 +144,23 @@ const VisualizerLayout = () => {
                 </div>
                 <h2 className="text-sm font-bold text-foreground">Infra Visualizer</h2>
                 <p className="max-w-sm text-[11px] leading-relaxed text-muted-foreground">
-                  Import a Terraform/Terragrunt repository to visualize your infrastructure
-                  as an interactive diagram. Upload a ZIP or connect to GitHub.
+                  Connect to a GitHub repository to visualize your Terraform
+                  infrastructure as an interactive diagram.
                 </p>
+                <Button
+                  variant="outline"
+                  size="sm"
+                  onClick={() => setSettingsOpen(true)}
+                >
+                  <TbSettings className="h-3.5 w-3.5" />
+                  Connect Repository
+                </Button>
               </div>
             </div>
           )}
         </main>
+
+        {/* Right inspector */}
         <VisualizerInspector />
       </div>
     </div>

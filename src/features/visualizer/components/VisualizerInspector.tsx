@@ -32,7 +32,7 @@ export const VisualizerInspector = () => {
 
   if (!selectedNode) {
     return (
-      <div className="flex w-64 flex-col border-l border-border bg-card">
+      <div className="flex w-72 flex-col border-l border-border bg-card">
         <div className="p-3 text-xs text-muted-foreground">
           Select a node to inspect
         </div>
@@ -45,7 +45,7 @@ export const VisualizerInspector = () => {
   const color = data.color as string;
 
   return (
-    <div className="flex w-64 flex-col border-l border-border bg-card">
+    <div className="flex w-72 flex-col border-l border-border bg-card">
       <div className="border-b border-border p-3">
         <div className="flex items-center gap-2">
           <div
@@ -77,15 +77,16 @@ export const VisualizerInspector = () => {
             <InfoRow label="Provider" value={String(data.provider)} />
             {typeof data.layer === 'string' && <InfoRow label="Layer" value={data.layer} />}
             {typeof data.project === 'string' && <InfoRow label="Project" value={data.project} />}
+            {typeof data.subproject === 'string' && <InfoRow label="Subproject" value={data.subproject} />}
             {typeof data.moduleSource === 'string' && <InfoRow label="Module" value={data.moduleSource} />}
           </Section>
 
           <Separator />
 
           <Section title="Source">
-            <div className="flex items-center gap-1.5 text-[10px] text-muted-foreground">
-              <TbFile className="h-3 w-3 shrink-0" />
-              <span className="truncate font-mono">{String(data.filePath)}</span>
+            <div className="flex items-start gap-1.5 text-[10px] text-muted-foreground">
+              <TbFile className="h-3 w-3 shrink-0 mt-0.5" />
+              <span className="break-all font-mono leading-relaxed">{String(data.filePath)}</span>
             </div>
             {typeof data.lineStart === 'number' && (
               <span className="text-[10px] text-muted-foreground">
@@ -131,21 +132,23 @@ const Section = ({ title, children }: { title: string; children: React.ReactNode
 );
 
 const InfoRow = ({ label, value }: { label: string; value: string }) => (
-  <div className="flex items-center justify-between">
+  <div className="flex flex-col gap-0.5">
     <span className="text-[10px] text-muted-foreground">{label}</span>
-    <span className="text-[10px] font-medium text-foreground">{value}</span>
+    <span className="break-all text-[10px] font-medium text-foreground">{value}</span>
   </div>
 );
 
 const DepRow = ({ icon, nodeId, label }: { icon: React.ReactNode; nodeId: string; label: string }) => {
   const shortId = nodeId.split('.').slice(-1)[0] ?? nodeId;
   return (
-    <div className="flex items-center gap-1.5">
-      {icon}
-      <span className="truncate text-[10px] text-foreground">{shortId}</span>
-      {label && (
-        <span className="ml-auto text-[9px] text-muted-foreground">.{label}</span>
-      )}
+    <div className="flex items-start gap-1.5">
+      <div className="shrink-0 mt-0.5">{icon}</div>
+      <div className="flex flex-col min-w-0">
+        <span className="break-all text-[10px] text-foreground">{shortId}</span>
+        {label && (
+          <span className="text-[9px] text-muted-foreground">.{label}</span>
+        )}
+      </div>
     </div>
   );
 };
