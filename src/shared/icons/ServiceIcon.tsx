@@ -4,8 +4,16 @@ import {
   TbServer, TbDatabase, TbBolt, TbWorld, TbShield,
   TbCloud, TbBox, TbNetwork, TbMail, TbContainer,
   TbBrain, TbChartBar, TbKey, TbStack2, TbRouter,
-  TbCpu, TbBucket, TbUsers, TbLambda, TbNote
+  TbCpu, TbBucket, TbUsers, TbLambda, TbNote,
+  TbAlignLeft, TbRocket, TbServerBolt, TbCloudComputing,
+  TbBrandDocker, TbDeviceFloppy, TbArchive, TbDeviceAnalytics,
+  TbTopologyStar, TbPlugConnected, TbWebhook, TbShieldLock,
+  TbFingerprint, TbLock, TbScan, TbEye, TbFileSearch,
+  TbActivity, TbSearch, TbFilter, TbTransform, TbGitBranch,
+  TbAutomation, TbSettingsAutomation, TbFileCode, TbCloudCog,
+  TbApiApp, TbSchema, TbGauge, TbWand
 } from 'react-icons/tb';
+
 
 import { BsFiletypeJson } from "react-icons/bs";
 import { FaReact, FaLaptopCode} from "react-icons/fa";
@@ -14,25 +22,78 @@ import { FaReact, FaLaptopCode} from "react-icons/fa";
 import { cn } from '@/shared/lib/utils';
 
 const iconMap: Record<string, React.ElementType> = {
+  // AWS — Compute
   'aws-ec2': TbServer,
-  'aws-s3': TbBucket,
-  'aws-rds': TbDatabase,
   'aws-lambda': TbLambda,
+  'aws-fargate': TbServerBolt,
+  'aws-batch': TbStack2,
+  'aws-lightsail': TbCloudComputing,
+  'aws-elastic-beanstalk': TbRocket,
+  // AWS — Containers
+  'aws-ecs': TbContainer,
+  'aws-eks': TbContainer,
+  'aws-ecr': TbBrandDocker,
+  // AWS — Storage
+  'aws-s3': TbBucket,
+  'aws-efs': TbDeviceFloppy,
+  'aws-ebs': TbDeviceFloppy,
+  'aws-glacier': TbArchive,
+  'aws-backup': TbArchive,
+  // AWS — Database
+  'aws-rds': TbDatabase,
   'aws-dynamodb': TbDatabase,
+  'aws-elasticache': TbDatabase,
+  'aws-aurora': TbDatabase,
+  'aws-redshift': TbDeviceAnalytics,
+  'aws-neptune': TbSchema,
+  'aws-documentdb': TbDatabase,
+  // AWS — Networking
   'aws-cloudfront': TbWorld,
   'aws-api-gateway': TbRouter,
   'aws-elb': TbNetwork,
-  'aws-sns': TbMail,
-  'aws-sqs': TbMail,
-  'aws-ecs': TbContainer,
-  'aws-eks': TbContainer,
   'aws-route53': TbWorld,
   'aws-vpc': TbShield,
+  'aws-nat-gateway': TbTopologyStar,
+  'aws-transit-gateway': TbTopologyStar,
+  'aws-direct-connect': TbPlugConnected,
+  'aws-privatelink': TbLock,
+  'aws-global-accelerator': TbRocket,
+  // AWS — Messaging
+  'aws-sns': TbMail,
+  'aws-sqs': TbMail,
+  'aws-mq': TbMail,
+  // AWS — Integration
+  'aws-eventbridge': TbWebhook,
+  'aws-step-functions': TbGitBranch,
+  'aws-appsync': TbApiApp,
+  // AWS — Security
   'aws-iam': TbKey,
-  'aws-cognito': TbShield,
-  'aws-elasticache': TbDatabase,
+  'aws-cognito': TbUsers,
+  'aws-waf': TbShieldLock,
+  'aws-guardduty': TbScan,
+  'aws-secrets-manager': TbFingerprint,
+  'aws-kms': TbLock,
+  'aws-acm': TbShieldLock,
+  // AWS — Monitoring
+  'aws-cloudwatch': TbActivity,
+  'aws-xray': TbSearch,
+  'aws-cloudtrail': TbEye,
+  // AWS — Analytics
   'aws-kinesis': TbStack2,
+  'aws-athena': TbFileSearch,
+  'aws-glue': TbTransform,
+  'aws-emr': TbCloudComputing,
+  'aws-quicksight': TbChartBar,
+  // AWS — ML
   'aws-sagemaker': TbBrain,
+  'aws-bedrock': TbWand,
+  // AWS — Developer Tools
+  'aws-codepipeline': TbAutomation,
+  'aws-codebuild': TbSettingsAutomation,
+  'aws-codedeploy': TbRocket,
+  // AWS — Management
+  'aws-cloudformation': TbFileCode,
+  'aws-systems-manager': TbCloudCog,
   'azure-vm': TbServer,
   'azure-blob': TbBucket,
   'azure-sql': TbDatabase,
@@ -67,6 +128,7 @@ const iconMap: Record<string, React.ElementType> = {
   'generic-react': FaReact,
   'generic-json': BsFiletypeJson,
   'generic-note': TbNote,
+  'generic-text': TbAlignLeft
 };
 
 interface ServiceIconProps {

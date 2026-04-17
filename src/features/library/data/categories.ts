@@ -8,4 +8,8 @@ export const serviceCategories: Record<string, string> = {
   security: 'Security',
   analytics: 'Analytics',
   ml: 'Machine Learning',
+  monitoring: 'Monitoring',
+  integration: 'Integration',
+  devtools: 'Developer Tools',
+  management: 'Management',
 };
