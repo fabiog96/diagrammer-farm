@@ -5,6 +5,7 @@ import { ReactFlowProvider } from '@xyflow/react';
 
 import { useUIStore } from '@/stores';
 import { ThemeToggle } from '@/shared/components/ThemeToggle';
+import { Logo } from '@/shared/icons/Logo';
 import {
   TooltipProvider, Tooltip, TooltipTrigger, TooltipContent,
   Button, Separator,
@@ -61,6 +62,7 @@ const VisualizerLayout = () => {
 
             <Separator orientation="vertical" className="mx-1 h-4" />
 
+            <Logo size={20} className="text-ink" />
             <span className="text-xs font-bold text-primary tracking-widest">ARCH</span>
             <span className="text-xs text-muted-foreground tracking-wider">VISUALIZER</span>
 

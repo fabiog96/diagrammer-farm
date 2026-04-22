@@ -9,6 +9,7 @@ import {
   TooltipProvider, Tooltip, TooltipTrigger, TooltipContent,
 } from '@/shared/components/ui';
 import { useDiagramStore, useUIStore } from '@/stores';
+import { Logo } from '@/shared/icons/Logo';
 import { ExportDialog } from '@/features/export/components';
 import { ThemeToggle } from '@/shared/components/ThemeToggle';
 import { GlobalConfigPanel } from '@/features/codegen/components';
@@ -36,6 +37,7 @@ export const TopBar = () => {
 
           <Separator orientation="vertical" className="mx-1 h-4" />
 
+          <Logo size={20} className="text-ink" />
           <span className="text-xs font-bold text-primary tracking-widest">
             ARCH
           </span>

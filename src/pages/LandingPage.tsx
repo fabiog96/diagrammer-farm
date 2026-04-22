@@ -4,6 +4,7 @@ import { TbPencilBolt, TbTopologyStarRing3 } from 'react-icons/tb';
 
 import { useUIStore } from '@/stores';
 import { ThemeToggle } from '@/shared/components/ThemeToggle';
+import { Logo } from '@/shared/icons/Logo';
 
 const modes = [
   {
@@ -38,9 +39,12 @@ export const LandingPage = () => {
         <ThemeToggle />
       </div>
 
-      <div className="mb-10 text-center">
-        <h1 className="text-lg font-bold tracking-widest text-primary">ARCH</h1>
-        <p className="text-xs tracking-wider text-muted-foreground">DIAGRAMMER</p>
+      <div className="mb-10 flex flex-col items-center gap-3">
+        <Logo size={48} className="text-ink" />
+        <div className="text-center">
+          <h1 className="text-lg font-bold tracking-widest text-primary">ARCH</h1>
+          <p className="text-xs tracking-wider text-muted-foreground">DIAGRAMMER</p>
+        </div>
       </div>
 
       <div className="flex gap-6">
