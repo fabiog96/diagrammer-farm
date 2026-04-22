@@ -1,5 +1,5 @@
 import { useState, useCallback } from 'react';
-import { TbBrandGithub, TbRefresh, TbLoader2, TbTrash } from 'react-icons/tb';
+import { TbRefresh, TbLoader2, TbTrash } from 'react-icons/tb';
 
 import { Input } from '@/shared/components/ui/input';
 import { Label } from '@/shared/components/ui/label';
@@ -23,7 +23,6 @@ export const GitHubSettings = ({ onSyncComplete }: GitHubSettingsProps) => {
   const repo = useGitHubStore((s) => s.repo);
   const branches = useGitHubStore((s) => s.branches);
   const selectedBranch = useGitHubStore((s) => s.selectedBranch);
-  const syncStatus = useGitHubStore((s) => s.syncStatus);
   const syncProgress = useGitHubStore((s) => s.syncProgress);
   const syncError = useGitHubStore((s) => s.syncError);
 
