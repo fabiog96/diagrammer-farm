@@ -2,7 +2,7 @@ import { memo } from 'react';
 import {
   BaseEdge,
   EdgeLabelRenderer,
-  getSmoothStepPath,
+  getBezierPath,
   type EdgeProps,
 } from '@xyflow/react';
 
@@ -35,14 +35,13 @@ const RawVizEdge = ({
   const edgeType = edgeData?.edgeType ?? 'explicit';
   const labelText = edgeData?.label;
 
-  const [edgePath, labelX, labelY] = getSmoothStepPath({
+  const [edgePath, labelX, labelY] = getBezierPath({
     sourceX,
     sourceY,
     targetX,
     targetY,
     sourcePosition,
     targetPosition,
-    borderRadius: 12,
   });
 
   const strokeDasharray = edgeType === 'ghost'
@@ -61,7 +60,7 @@ const RawVizEdge = ({
         ? 'var(--primary)'
         : 'var(--muted-foreground)';
 
-  const strokeOpacity = edgeType === 'ghost' ? 0.3 : 1;
+  const strokeOpacity = edgeType === 'ghost' ? 0.3 : selected ? 1 : 0.5;
 
   return (
     <>
@@ -70,7 +69,7 @@ const RawVizEdge = ({
         path={edgePath}
         style={{
           stroke: strokeColor,
-          strokeWidth: selected ? 2 : 1.5,
+          strokeWidth: selected ? 2 : 1,
           strokeDasharray,
           opacity: strokeOpacity,
           transition: 'stroke 0.15s, stroke-width 0.15s',

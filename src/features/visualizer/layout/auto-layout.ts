@@ -47,8 +47,8 @@ export const computeLayout = (
   g.setDefaultEdgeLabel(() => ({}));
   g.setGraph({
     rankdir: 'TB',
-    nodesep: 50,
-    ranksep: 80,
+    nodesep: 80,
+    ranksep: 120,
     marginx: 40,
     marginy: 40,
   });
