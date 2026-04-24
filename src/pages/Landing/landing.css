@@ -93,7 +93,7 @@
 }
 
 .landing .hero-sub {
-  color: var(--ink-2); font-size: 14px; max-width: 48ch; line-height: 1.7;
+  color: var(--ink-2); font-size: 14px; max-width: 60ch; line-height: 1.7;
   margin: 0 auto;
 }
 

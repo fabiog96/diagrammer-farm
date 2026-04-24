@@ -192,22 +192,3 @@ const validateUngroupedNodes = (nodes: Node[]): ValidationMessage[] => {
   return messages;
 };
 
-export const getNodeValidationStatus = (
-  nodeId: string,
-  messages: ValidationMessage[],
-): NodeValidationStatus => {
-  const nodeMessages = messages.filter((m) => m.nodeId === nodeId);
-  if (nodeMessages.some((m) => m.severity === 'error')) return 'error';
-  if (nodeMessages.some((m) => m.severity === 'warning')) return 'warning';
-  return null;
-};
-
-export const getEdgeValidationStatus = (
-  edgeId: string,
-  messages: ValidationMessage[],
-): NodeValidationStatus => {
-  const edgeMessages = messages.filter((m) => m.edgeId === edgeId);
-  if (edgeMessages.some((m) => m.severity === 'error')) return 'error';
-  if (edgeMessages.some((m) => m.severity === 'warning')) return 'warning';
-  return null;
-};
