@@ -18,22 +18,22 @@
 /* ── OKLCH Design Tokens ─────────────────────────────── */
 
 :root {
-  /* Light (default) — warm parchment palette */
-  --paper:        oklch(0.944 0.018 82);   /* #f3ece0  crema caldo */
-  --paper-2:      oklch(0.958 0.015 84);   /* #f8f2e7  avorio (surface) */
-  --paper-3:      oklch(0.925 0.020 80);
-  --ink:          oklch(0.18  0.010 65);    /* #1b1915  nero caldo */
-  --ink-2:        oklch(0.30  0.012 70);    /* #3a362d */
-  --ink-3:        oklch(0.59  0.016 80);    /* #8a8272  sabbia */
-  --ink-4:        oklch(0.81  0.018 80);    /* #c9bda6  dot */
-  --rule:         oklch(0.84  0.024 80);    /* #d4c8b2 */
-  --rule-strong:  oklch(0.76  0.032 78);    /* #bdae92 */
-  --accent:       oklch(0.54  0.155 48);    /* #c45a1c  arancio bruciato */
-  --accent-ink:   oklch(0.40  0.120 48);    /* #8a3a0e */
+  /* Light (default) — neobrutalist crisp palette */
+  --paper:        oklch(0.97  0.008 90);   /* bright off-white */
+  --paper-2:      oklch(0.96  0.012 85);   /* slightly tinted surface */
+  --paper-3:      oklch(0.93  0.015 80);
+  --ink:          oklch(0.15  0.005 60);   /* near-black */
+  --ink-2:        oklch(0.30  0.012 70);
+  --ink-3:        oklch(0.59  0.016 80);
+  --ink-4:        oklch(0.81  0.018 80);
+  --rule:         oklch(0.30  0.008 60);   /* dark borders — neobrutalism key */
+  --rule-strong:  oklch(0.18  0.005 60);   /* almost black */
+  --accent:       oklch(0.62  0.20  45);   /* vibrant orange */
+  --accent-ink:   oklch(0.40  0.120 48);
   --accent-wash:  oklch(0.92  0.05  55);
   --teal:         oklch(0.58  0.08  210);
   --teal-wash:    oklch(0.92  0.03  200);
-  --ok:           oklch(0.48  0.10  140);   /* #3f6e3a  foresta */
+  --ok:           oklch(0.48  0.10  140);
   --warn:         oklch(0.72  0.13  80);
   --err:          oklch(0.55  0.18  28);
 }
@@ -46,8 +46,8 @@
   --ink-2:        oklch(0.80  0.010 80);
   --ink-3:        oklch(0.64  0.012 80);
   --ink-4:        oklch(0.48  0.010 70);
-  --rule:         oklch(0.35  0.006 70);
-  --rule-strong:  oklch(0.44  0.006 70);
+  --rule:         oklch(0.85  0.008 80);   /* light borders on dark — brutalist inverted */
+  --rule-strong:  oklch(0.90  0.005 80);
   --accent-wash:  oklch(0.32  0.07  55);
   --teal-wash:    oklch(0.30  0.04  210);
   /* accent, accent-ink, teal, ok, warn, err → inherited from :root */
@@ -56,7 +56,7 @@
 /* ── Bridge: OKLCH tokens → Tailwind semantic aliases ── */
 
 :root {
-  --radius: 0.5rem;
+  --radius: 0.2rem;
 
   --background:             var(--paper);
   --foreground:             var(--ink);
@@ -132,6 +132,14 @@
   --radius-md: var(--radius);
   --radius-lg: calc(var(--radius) + 2px);
   --radius-xl: calc(var(--radius) + 4px);
+}
+
+/* Neobrutalist solid shadow */
+.shadow-brutal {
+  box-shadow: 4px 4px 0px var(--ink);
+}
+.shadow-brutal-sm {
+  box-shadow: 2px 2px 0px var(--ink);
 }
 
 @layer base {

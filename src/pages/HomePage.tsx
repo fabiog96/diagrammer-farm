@@ -51,7 +51,7 @@ export const HomePage = () => {
           <Link
             key={to}
             to={to}
-            className="group flex w-64 flex-col items-center gap-4 rounded-lg border border-border bg-card p-6 transition-all duration-150 hover:border-primary/50 hover:shadow-lg hover:shadow-primary/5"
+            className="shadow-brutal group flex w-64 flex-col items-center gap-4 rounded-md border-2 border-foreground bg-card p-6 transition-all duration-150 hover:shadow-brutal-sm hover:translate-x-[2px] hover:translate-y-[2px]"
           >
             <div className="flex h-14 w-14 items-center justify-center rounded-md bg-secondary transition-colors duration-150 group-hover:bg-primary/10">
               <Icon className="h-7 w-7 text-muted-foreground transition-colors duration-150 group-hover:text-primary" />
