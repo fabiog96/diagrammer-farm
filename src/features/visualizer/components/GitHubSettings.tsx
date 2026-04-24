@@ -1,5 +1,6 @@
 import { useState, useCallback } from 'react';
-import { TbRefresh, TbLoader2, TbTrash } from 'react-icons/tb';
+import { Link } from 'react-router';
+import { TbRefresh, TbLoader2, TbTrash, TbHelp } from 'react-icons/tb';
 
 import { Input } from '@/shared/components/ui/input';
 import { Label } from '@/shared/components/ui/label';
@@ -67,7 +68,16 @@ export const GitHubSettings = ({ onSyncComplete }: GitHubSettingsProps) => {
   return (
     <div className="space-y-3">
       <div className="space-y-1.5">
-        <Label className="text-[10px]">Personal Access Token</Label>
+        <div className="flex items-center justify-between">
+          <Label className="text-[10px]">Personal Access Token</Label>
+          <Link
+            to="/guide/github-token"
+            className="inline-flex items-center gap-1 text-[10px] text-muted-foreground hover:text-primary transition-colors"
+          >
+            <TbHelp className="h-3 w-3" />
+            How to create a token?
+          </Link>
+        </div>
         <Input
           type="password"
           placeholder="ghp_..."
