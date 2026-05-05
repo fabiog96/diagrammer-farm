@@ -4,7 +4,8 @@ import {
   TbServer, TbDatabase, TbCloud, TbNetwork,
   TbCpu, TbBucket, TbUsers, TbNote, TbAlignLeft,
   TbApi, TbDeviceMobile, TbBrowser,
-  TbSmartHome, TbUserCode, TbUserShield, TbGlobe
+  TbSmartHome, TbUserCode, TbUserShield, TbGlobe,
+  TbBoxMultiple
 } from 'react-icons/tb';
 
 import { BsFiletypeJson } from 'react-icons/bs';
@@ -31,6 +32,7 @@ const genericIconMap: Record<string, React.ElementType> = {
   'generic-admin': TbUserShield,
   'generic-internet': TbGlobe,
   'generic-cloud': TbCloud,
+  'generic-group': TbBoxMultiple,
   'generic-note': TbNote,
   'generic-text': TbAlignLeft
 };

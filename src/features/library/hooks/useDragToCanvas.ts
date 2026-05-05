@@ -2,7 +2,7 @@ import { useCallback, type DragEvent } from 'react';
 
 import { useReactFlow } from '@xyflow/react';
 
-import type { ServiceDefinition, TechNodeData} from '@/shared/types';
+import type { ServiceDefinition, TechNodeData, GroupNodeData } from '@/shared/types';
 import { useDiagramStore } from '@/stores';
 import { getModule } from '@/features/codegen/data/module-registry';
 
@@ -32,6 +32,22 @@ export const useDragToCanvas = () => {
 
       nodeIdCounter += 1;
       const id = `${service.id}-${Date.now()}-${nodeIdCounter}`;
+
+      if (service.id === 'generic-group') {
+        const groupData: GroupNodeData = {
+          label: 'Group',
+          color: service.defaultColor,
+          folderName: '',
+        };
+        addNode({
+          id,
+          type: 'group' as const,
+          position,
+          data: groupData,
+          style: { width: 400, height: 300 },
+        });
+        return;
+      }
 
       if(service.id === 'generic-text'){
         addNode({

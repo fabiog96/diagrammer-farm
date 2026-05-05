@@ -55,6 +55,7 @@ const RawSmartEdge = ({
       <BaseEdge
         id={id}
         path={edgePath}
+        markerEnd="url(#arrowhead)"
         style={{
           stroke: strokeColor,
           strokeWidth: selected ? 2 : 1.5,

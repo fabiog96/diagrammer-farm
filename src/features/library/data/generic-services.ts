@@ -22,6 +22,7 @@ export const genericServices: ServiceDefinition[] = [
   generic('admin', 'Admin', 'actors'),
   generic('internet', 'Internet', 'other'),
   generic('cloud', 'Cloud', 'other'),
+  generic('group', 'Group', 'other', '#6366f1'),
   generic('text', 'Text', 'other'),
   generic('note', 'Note', 'other', '#facc15'),
 ];

@@ -32,9 +32,9 @@ const RawTechNode = ({ id, data, selected }: NodeProps) => {
       )}
       style={{ borderLeftColor: nodeData.color, borderLeftWidth: 3 }}
     >
-      <Handle type="target" position={Position.Top} className="!bg-primary !border-background" />
-      <Handle type="source" position={Position.Bottom} className="!bg-primary !border-background" />
-      <Handle type="target" position={Position.Left} id="left" className="!bg-primary !border-background" />
+      <Handle type="source" position={Position.Top} id="top" className="!bg-primary !border-background" />
+      <Handle type="source" position={Position.Bottom} id="bottom" className="!bg-primary !border-background" />
+      <Handle type="source" position={Position.Left} id="left" className="!bg-primary !border-background" />
       <Handle type="source" position={Position.Right} id="right" className="!bg-primary !border-background" />
 
       <div className="flex items-center gap-2">
