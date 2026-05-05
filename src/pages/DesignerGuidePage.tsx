@@ -4,7 +4,7 @@ import {
   TbArrowLeft, TbMouse, TbKeyboard, TbClick,
   TbArrowsMove, TbTrash, TbCopy, TbClipboard,
   TbZoomIn, TbZoomOut, TbArrowBack,
-  TbPlugConnected, TbBoxMultiple, TbDownload, TbUpload,
+  TbPlugConnected, TbBoxMultiple, TbDownload,
 } from 'react-icons/tb';
 
 import { useUIStore } from '@/stores';
